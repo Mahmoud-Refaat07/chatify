@@ -1,14 +1,11 @@
 import jwt from "jsonwebtoken";
-import "dotenv/config";
-
-const { JWT_SECRET_KEY, NODE_ENV } = process.env;
+import { ENV } from "./env.js";
+const { JWT_SECRET_KEY, NODE_ENV } = ENV;
 
 export const generateToken = (userId, res) => {
   const token = jwt.sign({ userId }, JWT_SECRET_KEY, {
     expiresIn: "7d",
   });
-
-  console.log(token);
 
   res.cookie("jwt", token, {
     maxAge: 7 * 24 * 60 * 60 * 1000,
