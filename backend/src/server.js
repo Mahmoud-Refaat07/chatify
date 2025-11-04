@@ -5,6 +5,7 @@ import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import { connectDb } from "./lib/connectDb.js";
 import { ENV } from "./lib/env.js";
+import { arcjetProtection } from "./middleware/arcjet.middleware.js";
 
 const app = express();
 const __dirname = path.resolve();
