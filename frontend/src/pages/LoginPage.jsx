@@ -45,7 +45,7 @@ const LoginPage = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* EMAIL INPUT */}
                   <div>
-                    <label className="auth-input=label">Email</label>
+                    <label className="auth-input-label">Email</label>
                     <div className="relative">
                       <MailIcon className="auth-input-icon" />
                       <input
@@ -64,7 +64,7 @@ const LoginPage = () => {
                   </div>{" "}
                   {/* PASSWORD INPUT */}
                   <div>
-                    <label className="auth-input=label">Password</label>
+                    <label className="auth-input-label">Password</label>
                     <div className="relative">
                       <LockIcon className="auth-input-icon" />
                       <input

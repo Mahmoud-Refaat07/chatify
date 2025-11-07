@@ -45,7 +45,7 @@ const SignUpPage = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* USERNAME INPUT */}
                   <div>
-                    <label className="auth-input=label">Username</label>
+                    <label className="auth-input-label">Username</label>
                     <div className="relative">
                       <UserIcon className="auth-input-icon" />
                       <input
@@ -64,7 +64,7 @@ const SignUpPage = () => {
                   </div>{" "}
                   {/* EMAIL INPUT */}
                   <div>
-                    <label className="auth-input=label">Email</label>
+                    <label className="auth-input-label">Email</label>
                     <div className="relative">
                       <MailIcon className="auth-input-icon" />
                       <input
@@ -83,7 +83,7 @@ const SignUpPage = () => {
                   </div>{" "}
                   {/* PASSWORD INPUT */}
                   <div>
-                    <label className="auth-input=label">Password</label>
+                    <label className="auth-input-label">Password</label>
                     <div className="relative">
                       <LockIcon className="auth-input-icon" />
                       <input
