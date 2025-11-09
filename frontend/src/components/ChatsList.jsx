@@ -4,13 +4,14 @@ import UserLoadingSkeleton from "./UserLoadingSkeleton";
 import NoChatsFound from "./NoChatsFound";
 
 const ChatsList = () => {
-  const { getMyChatPartners, chats, isUserLoading, setSelectedUser } =
+  const { getMyChatPartners, chats, isUsersLoading, setSelectedUser } =
     useChatStore();
 
   useEffect(() => {
     getMyChatPartners();
   }, [getMyChatPartners]);
-  if (isUserLoading) return <UserLoadingSkeleton />;
+
+  if (isUsersLoading) return <UserLoadingSkeleton />;
   if (chats.length === 0) return <NoChatsFound />;
 
   return (
