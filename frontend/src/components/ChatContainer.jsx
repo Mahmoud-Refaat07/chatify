@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
 import ChatHeader from "./ChatHeader";
@@ -11,14 +11,22 @@ const ChatContainer = () => {
     useChatStore();
   const { authUser } = useAuthStore();
 
+  const messageEndRef = useRef(null);
+
   useEffect(() => {
     getMessagesByUserId(selectedUser._id);
   }, [getMessagesByUserId, selectedUser]);
 
+  useEffect(() => {
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
   return (
     <>
       <ChatHeader />
-      <div className="flex-1 px-6 overflow-y-autho py-8">
+      <div className="flex-1 px-6 overflow-y-auto py-8">
         {messages.length > 0 && !isMessageLoading ? (
           <div className="max-w-3xl mx-auto space-y-6">
             {messages.map((msg) => (
@@ -44,7 +52,7 @@ const ChatContainer = () => {
                   )}
                   {msg.text && <p className="mt-2">{msg.text}</p>}
                   <p className="text-xs mt-1 opaci-75 flex items-center gap-1">
-                    {new Date(msg.createdAt).toLocaleTimeString([], {
+                    {new Date(msg.createdAt).toLocaleTimeString(undefined, {
                       hour: "2-digit",
                       minute: "2-digit",
                     })}
@@ -52,6 +60,8 @@ const ChatContainer = () => {
                 </div>
               </div>
             ))}
+            {/* SCROLLING */}
+            <div ref={messageEndRef} />
           </div>
         ) : isMessageLoading ? (
           <MessageLoadingSkeleton />
