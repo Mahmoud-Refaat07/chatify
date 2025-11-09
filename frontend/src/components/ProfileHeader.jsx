@@ -36,7 +36,7 @@ const ProfileHeader = () => {
           {/* AVATAR */}
           <div className="avatar avatar-online">
             <button
-              className="size-14 rounded-full overflow-hidden relative group "
+              className="size-14 rounded-full overflow-hidden relative group cursor-pointer"
               onClick={() => fileInputRef.current.click()}
             >
               {isUpdatingProfileImage ? (
@@ -45,7 +45,7 @@ const ProfileHeader = () => {
                 <img
                   src={selectedImg || authUser.profilePic || "/avatar.png"}
                   alt="user image"
-                  className="size-full object-cover "
+                  className="size-full object-cover"
                 />
               )}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
@@ -63,7 +63,7 @@ const ProfileHeader = () => {
           {/* USERNAME & ONLINE TEXT */}
           <div className="sm:md-5 md:pr-20">
             <h3 className="text-slate-200 font-medium text-base max-w-[180px] truncate">
-              {authUser.username}
+              {authUser.username || authUser.updatedUser.username}
             </h3>
             <p className="text-slate-400 text-xs">Online</p>
           </div>

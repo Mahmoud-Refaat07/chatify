@@ -9,6 +9,7 @@ import NoConversationPlaceholder from "../components/NoConversationPlaceholder";
 
 const ChatPage = () => {
   const { activeTab, selectedUser } = useChatStore();
+  console.log(activeTab);
 
   return (
     <div className="relative w-full max-w-6xl h-screen md:h-[800px] mx-auto p-5 ">
@@ -17,12 +18,12 @@ const ChatPage = () => {
         <div className="bg-slate-800/50 backdrop-blur-sm flex-col">
           <ProfileHeader />
           <ActiveTabSwitch />
-          <div className="flex-1 overflow-y-auto p-4 space-y-2">
+          <div className="flex-1 overflow-y-auto p-4 space-y-2 ">
             {activeTab === "chats" ? <ChatsList /> : <ContactList />}
           </div>
         </div>
         {/* RIGHT SIDE */}
-        <div className="flex-1 flex flex-col bg-slate-900/50 backdrop-blur-sm">
+        <div className="flex-1 flex flex-col bg-slate-900/50 backdrop-blur-sm h-full">
           {selectedUser ? <ChatContainer /> : <NoConversationPlaceholder />}
         </div>
       </BorderAnimatedContainer>
@@ -31,3 +32,23 @@ const ChatPage = () => {
 };
 
 export default ChatPage;
+
+/*
+   <div className="relative w-full max-w-6xl h-screen md:h-[800px] mx-auto p-5 ">
+      <BorderAnimatedContainer>
+        <ProfileHeader />
+        {!selectedUser ? (
+          <div className="bg-slate-800/50 backdrop-blur-sm flex-col">
+            <ActiveTabSwitch />
+            <div className="flex-1 overflow-y-auto p-4 space-y-2 ">
+              {activeTab === "chats" ? <ChatsList /> : <ContactList />}
+            </div>
+          </div>
+        ) : (
+          <div className="flex-1 flex flex-col bg-slate-900/50 backdrop-blur-sm ">
+            {selectedUser ? <ChatContainer /> : <NoConversationPlaceholder />}
+          </div>
+        )}
+      </BorderAnimatedContainer>
+    </div>
+*/
