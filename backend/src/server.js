@@ -6,8 +6,8 @@ import messageRoutes from "./routes/message.route.js";
 import cors from "cors";
 import { connectDb } from "./lib/connectDb.js";
 import { ENV } from "./lib/env.js";
+import { app, server } from "./lib/socket.js";
 
-const app = express();
 const __dirname = path.resolve();
 const PORT = ENV.PORT || 3000;
 
@@ -31,7 +31,7 @@ if (ENV.NODE_ENV === "production") {
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
   connectDb();
 });
