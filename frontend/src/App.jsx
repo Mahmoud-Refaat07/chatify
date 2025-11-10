@@ -15,6 +15,14 @@ const App = () => {
     checkAuth();
   }, [checkAuth]);
 
+  useEffect(() => {
+    const unlockAudio = () => {
+      const silentAudio = new Audio();
+      silentAudio.play().catch(() => {});
+      window.removeEventListener("click", unlockAudio);
+    };
+    window.addEventListener("click", unlockAudio);
+  }, []);
   return (
     <div className="min-h-screen bg-slate-900 relative flex items-center justify-center p4 overflow-hidden">
       {/* DICORATES- GRID BG & GLOW SHIPS */}

@@ -67,8 +67,8 @@ export const useChatStore = create((set, get) => ({
     const tempId = `temp-${Date.now()}`;
     const optimisticMessage = {
       _id: tempId,
-      senderId: selectedUser._id,
-      receiverId: authUser._id,
+      senderId: authUser._id,
+      receiverId: selectedUser._id,
       text: messageData.text,
       image: messageData.image,
       createdAt: new Date().toISOString(),
@@ -87,5 +87,36 @@ export const useChatStore = create((set, get) => ({
       console.log("Error sending message", error);
       toast.error(error.response?.data?.message || "Something went wrong");
     }
+  },
+
+  subscribeToMessages: () => {
+    const { selectedUser, isSoundEnabled } = get();
+    if (!selectedUser) return;
+
+    const socket = useAuthStore.getState().socket;
+
+    socket.on("newMessage", (newMessage) => {
+      const isMessageSendFromSelectedUser =
+        newMessage.senderId === selectedUser._id;
+      if (!isMessageSendFromSelectedUser) return;
+
+      const currentMessages = get().messages;
+      set({ messages: [...currentMessages, newMessage] });
+
+      if (isSoundEnabled) {
+        const notificationSound = new Audio(
+          "/sounds/frontend_public_sounds_notification.mp3"
+        );
+        notificationSound.currentTime = 0;
+        notificationSound
+          .play()
+          .catch((e) => console.log("audio play failed", e));
+      }
+    });
+  },
+
+  unsubscribeFromMessages: () => {
+    const socket = useAuthStore.getState().socket;
+    socket.off("newMessage");
   },
 }));

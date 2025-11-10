@@ -4,7 +4,7 @@ import useKeyboardSound from "../hooks/useKeyboardSound";
 import { ImageIcon, SendIcon, XIcon } from "lucide-react";
 
 const MessageInput = () => {
-  const { playRandomKeyStrokesSound } = useKeyboardSound();
+  const { playRandomKeyStrokeSound } = useKeyboardSound();
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -13,9 +13,8 @@ const MessageInput = () => {
 
   const handleSendMessage = (event) => {
     event.preventDefault();
-    console.log(text);
     if (!text.trim() && !imagePreview) return;
-    if (isSoundEnable) playRandomKeyStrokesSound();
+    if (isSoundEnable) playRandomKeyStrokeSound();
 
     sendMessages({
       text: text.trim(),
@@ -70,7 +69,7 @@ const MessageInput = () => {
           value={text}
           onChange={(e) => {
             setText(e.currentTarget.value);
-            isSoundEnable && playRandomKeyStrokesSound();
+            isSoundEnable && playRandomKeyStrokeSound();
           }}
           className="w-full flex bg-slate-800/50 border border-slate-700/50 rounded-lg py-2 px-4"
           placeholder="Type your message..."
