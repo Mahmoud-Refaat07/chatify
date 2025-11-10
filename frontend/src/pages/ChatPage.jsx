@@ -11,19 +11,27 @@ const ChatPage = () => {
   const { activeTab, selectedUser } = useChatStore();
 
   return (
-    <div className="relative w-full max-w-6xl h-screen md:h-[800px] mx-auto p-5 ">
+    <div className="relative w-full max-w-6xl h-screen md:h-[800px] mx-auto p-5">
       <BorderAnimatedContainer>
-        {/* LEFT SIDE */}
-        <div className="bg-slate-800/50 backdrop-blur-sm flex-col">
-          <ProfileHeader />
-          <ActiveTabSwitch />
-          <div className="flex-1 overflow-y-auto p-4 space-y-2 ">
-            {activeTab === "chats" ? <ChatsList /> : <ContactList />}
+        {/* Wrapper should be flex and full height */}
+        <div className="flex flex-col md:flex-row w-full h-full">
+          {/* LEFT SIDE */}
+          <div className="flex flex-col w-full md:w-1/3 bg-slate-800/50 backdrop-blur-sm border-b md:border-b-0 md:border-r border-slate-700/50">
+            <ProfileHeader />
+            <ActiveTabSwitch />
+
+            {/* Scrollable user list */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-2">
+              {activeTab === "chats" ? <ChatsList /> : <ContactList />}
+            </div>
           </div>
-        </div>
-        {/* RIGHT SIDE */}
-        <div className="flex-1 flex flex-col bg-slate-900/50 backdrop-blur-sm h-full">
-          {selectedUser ? <ChatContainer /> : <NoConversationPlaceholder />}
+
+          {/* RIGHT SIDE */}
+          <div
+            className={` md:flex-1 flex flex-col bg-slate-900/50 backdrop-blur-sm h-full`}
+          >
+            {selectedUser ? <ChatContainer /> : <NoConversationPlaceholder />}
+          </div>
         </div>
       </BorderAnimatedContainer>
     </div>
