@@ -4,8 +4,13 @@ import { useAuthStore } from "../store/useAuthStore";
 import UserLoadingSkeleton from "./UserLoadingSkeleton";
 
 const ContactList = () => {
-  const { allContacts, getAllContacts, isUsersLoading, setSelectedUser } =
-    useChatStore();
+  const {
+    allContacts,
+    getAllContacts,
+    isUsersLoading,
+    setSelectedUser,
+    setIsMobile,
+  } = useChatStore();
   const { onlineUsers } = useAuthStore();
 
   useEffect(() => {
@@ -20,7 +25,10 @@ const ContactList = () => {
         <div
           key={contact._id}
           className="bg-cyan-500/10 p-4 rounded-lg cursor-pointer hover:bg-cyan-500/20 transition-colors"
-          onClick={() => setSelectedUser(contact)}
+          onClick={() => {
+            setSelectedUser(contact);
+            setIsMobile();
+          }}
         >
           <div className="flex items-center gap-3">
             <div
