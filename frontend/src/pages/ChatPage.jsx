@@ -16,7 +16,7 @@ const ChatPage = () => {
         {/* Wrapper should be flex and full height */}
         <div className="flex flex-col md:flex-row w-full h-full">
           {/* LEFT SIDE */}
-          <div className="flex flex-col w-full md:w-1/3 bg-slate-800/50 backdrop-blur-sm border-b md:border-b-0 md:border-r border-slate-700/50  ">
+          <div className="flex flex-col w-full md:w-1/3 bg-slate-800/50 backdrop-blur-sm border-b md:border-b-0 md:border-r border-slate-700/50 min-h-[1px] ">
             <div className={`${isMobile ? "hidden" : ""} md:block`}>
               <ProfileHeader />
               <ActiveTabSwitch />
