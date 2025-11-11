@@ -26,7 +26,7 @@ const ChatPage = () => {
             <div
               className={`${
                 isMobile ? "hidden" : ""
-              }  md:block flex-1 overflow-y-auto p-4 space-y-2 max-h-[545px] md:h-screen`}
+              }  md:block flex-1 overflow-y-auto p-4 space-y-2 `}
             >
               {activeTab === "chats" ? <ChatsList /> : <ContactList />}
             </div>
