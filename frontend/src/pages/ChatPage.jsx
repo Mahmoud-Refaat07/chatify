@@ -35,8 +35,8 @@ const ChatPage = () => {
           {/* RIGHT SIDE */}
           <div
             className={`${
-              isMobile ? "flex" : ""
-            }hidden md:flex flex-1  flex-col bg-slate-900/50 backdrop-blur-sm  overflow-y-auto`}
+              isMobile ? "flex" : "hidden"
+            } md:flex flex-1  flex-col bg-slate-900/50 backdrop-blur-sm  overflow-y-auto`}
           >
             {selectedUser ? <ChatContainer /> : <NoConversationPlaceholder />}
           </div>
