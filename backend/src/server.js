@@ -8,25 +8,36 @@ import { connectDb } from "./lib/connectDb.js";
 import { ENV } from "./lib/env.js";
 import { app, server } from "./lib/socket.js";
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 const PORT = ENV.PORT || 3000;
 
 app.use(
   cors({
-    origin: ENV.CLIENT_URL,
+    origin: function (origin, callback) {
+      if (
+        !origin ||
+        origin.endsWith(".vercel.app") ||
+        origin === "http://localhost:5173"
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-  })
+  }),
 );
+
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 
 // make ready for deployment
-if (ENV.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
-  app.get("/", (_, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
-}
+// if (ENV.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "../frontend/dist")));
+//   app.get("/", (_, res) => {
+//     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+//   });
+// }
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
